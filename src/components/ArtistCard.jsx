@@ -1,5 +1,3 @@
-const ArtistCard = () => {
-  ;<div>ArtistCard</div>
-}
+const ArtistCard = () => <div>ArtistCard</div>
 
 export default ArtistCard
