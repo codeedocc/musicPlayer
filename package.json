@@ -5,9 +5,8 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
     "dev": "vite",
-    "buildVite": "vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "homepage": "https://codeedocc.github.io/musicPlayer",
