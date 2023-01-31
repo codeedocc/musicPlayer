@@ -23,7 +23,7 @@ const SongDetails = () => {
   } = useGetSongRelatedQuery({ songid })
 
   if (isFetchingSongDetails || isFetchinRelatedSongs)
-    return <Loader title="Searching song details" />
+    return <Loader title="Загружаем информацию о песне..." />
 
   if (error) return <Error />
 
@@ -38,10 +38,10 @@ const SongDetails = () => {
 
   return (
     <div className="flex flex-col">
-      <DetailsHeader artistId="" songData={songData} />
+      <DetailsHeader artistId={artistId} songData={songData} />
 
       <div className="mb-10 mt-5">
-        <h2 className="text-white text-3xl font-bold pt-5">Lyrics:</h2>
+        <h2 className="text-white text-3xl font-bold pt-5">Текст:</h2>
 
         <div className="mt-5">
           {songData?.sections[1].type === 'LYRICS' ? (
@@ -55,7 +55,7 @@ const SongDetails = () => {
             ))
           ) : (
             <p className="text-gray-400 text-base my-1">
-              Sorry, No lyrics found!
+              К сожалению, текст не найден.
             </p>
           )}
         </div>

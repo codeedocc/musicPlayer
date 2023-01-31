@@ -15,7 +15,7 @@ const Discover = () => {
 
   const genreTitle = genres.find(({ value }) => value === genreListId)?.title
 
-  if (isFetching) return <Loader title="Loading songs..." />
+  if (isFetching) return <Loader title="Загружаем песни..." />
 
   if (error) return <Error />
 
@@ -23,7 +23,7 @@ const Discover = () => {
     <div className="flex flex-col">
       <div className="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10">
         <h2 className="font-bold text-3xl text-white text-left">
-          Discover {genreTitle}
+          Главная {genreTitle}
         </h2>
 
         <select

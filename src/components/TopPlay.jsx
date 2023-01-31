@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper'
 import PlayPause from './PlayPause'
@@ -17,36 +17,44 @@ const TopChartCard = ({
   activeSong,
   handlePauseClick,
   handlePlayClick,
-}) => (
-  <div className="w-full flex flex-row items-center hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2">
-    <h3 className="font-bold text-base text-white mr-3">{i + 1}.</h3>
-    <div className="flex-1 flex flex-row justify-between items-center">
-      <img
-        src={song?.images.coverart}
-        alt={song?.title}
-        className="w-20 h-20 rounded-lg"
-      />
-      <div className="flex-1 flex flex-col justify-center mx-3">
-        <Link to={`/songs/${song.key}`}>
-          <p className="text-xl font-bold text-white">{song?.title}</p>
-        </Link>
-        <Link to={`/artists/${song?.artists[0].adamid}`}>
-          <p className="text-base text-gray-300 mt-1">{song?.subtitle}</p>
-        </Link>
+}) => {
+  const navigate = useNavigate()
+
+  return (
+    <div className="w-full flex flex-row items-center hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2">
+      <h3 className="font-bold text-base text-white mr-3">{i + 1}.</h3>
+      <div className="flex-1 flex flex-row justify-between items-center">
+        <img
+          src={song?.images?.coverart}
+          alt={song?.title}
+          className="w-20 h-20 rounded-lg"
+        />
+        <div className="flex-1 flex flex-col justify-center mx-3">
+          <Link to={`/songs/${song.key}`}>
+            <p className="text-xl font-bold text-white">{song?.title}</p>
+          </Link>
+          <p
+            className="text-base text-gray-300 mt-1"
+            onClick={() => navigate(`/artists/${song?.artists[0].adamid}`)}
+          >
+            {song?.subtitle}
+          </p>
+        </div>
       </div>
+      <PlayPause
+        isPlaying={isPlaying}
+        activeSong={activeSong}
+        song={song}
+        handlePause={handlePauseClick}
+        handlePlay={handlePlayClick}
+      />
     </div>
-    <PlayPause
-      isPlaying={isPlaying}
-      activeSong={activeSong}
-      song={song}
-      handlePause={handlePauseClick}
-      handlePlay={handlePlayClick}
-    />
-  </div>
-)
+  )
+}
 
 const TopPlay = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { activeSong, isPlaying } = useSelector((state) => state.player)
   const { data } = useGetTopChartsQuery()
   const divRef = useRef(null)
@@ -73,9 +81,9 @@ const TopPlay = () => {
     >
       <div className="w-full flex flex-col">
         <div className="flex flex-row justify-between items-center">
-          <h2 className="text-white font-bold text-xl">Top Charts</h2>
+          <h2 className="text-white font-bold text-xl">В тренде</h2>
           <Link to="/top-charts">
-            <p className="text-gray-300 text-base cursor-pointer">See more</p>
+            <p className="text-gray-300 text-base cursor-pointer">Ещё</p>
           </Link>
         </div>
 
@@ -96,9 +104,9 @@ const TopPlay = () => {
 
       <div className="w-full flex flex-col mt-8">
         <div className="flex flex-row justify-between items-center">
-          <h2 className="text-white font-bold text-xl">Top Artists</h2>
+          <h2 className="text-white font-bold text-xl">Лучшие исполнители</h2>
           <Link to="/top-artists">
-            <p className="text-gray-300 text-base cursor-pointer">See more</p>
+            <p className="text-gray-300 text-base cursor-pointer">Ещё</p>
           </Link>
         </div>
 
@@ -117,13 +125,12 @@ const TopPlay = () => {
               style={{ width: '25%', height: 'auto' }}
               className="shadow-lg rounded-full animate-slideright"
             >
-              <Link to={`/artists/${song?.artists[0].adamid}`}>
-                <img
-                  src={song?.images.background}
-                  alt="name"
-                  className="rounded-full w-full object-cover"
-                />
-              </Link>
+              <img
+                src={song?.images?.background}
+                alt="name"
+                className="rounded-full w-full object-cover cursor-pointer"
+                onClick={() => navigate(`/artists/${song?.artists[0].adamid}`)}
+              />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -3,13 +3,18 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "build": "react-scripts build",
     "dev": "vite",
-    "build": "vite build",
+    "buildVite": "vite build",
     "preview": "vite preview"
   },
+  "homepage": "https://codeedocc.github.io/musicPlayer",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",

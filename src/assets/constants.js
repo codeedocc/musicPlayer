@@ -1,8 +1,8 @@
 import {
-  HiOutlineHome,
-  HiOutlinePhotograph,
-  HiOutlineUserGroup,
-  HiOutlineHashtag,
+  HiOutlineLocationMarker,
+  HiOutlineMusicNote,
+  HiStar,
+  HiFire,
 } from 'react-icons/hi'
 
 export const genres = [
@@ -23,8 +23,8 @@ export const genres = [
 ]
 
 export const links = [
-  { name: 'Discover', to: '/', icon: HiOutlineHome },
-  { name: 'Around You', to: '/around-you', icon: HiOutlinePhotograph },
-  { name: 'Top Artists', to: '/top-artists', icon: HiOutlineUserGroup },
-  { name: 'Top Charts', to: '/top-charts', icon: HiOutlineHashtag },
+  { name: 'Главная', to: '/', icon: HiOutlineMusicNote },
+  { name: 'Вокруг вас', to: '/around-you', icon: HiOutlineLocationMarker },
+  { name: 'В тренде', to: '/top-charts', icon: HiFire },
+  { name: 'Лучшие исполнители', to: '/top-artists', icon: HiStar },
 ]
