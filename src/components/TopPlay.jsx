@@ -55,7 +55,9 @@ const TopChartCard = ({
 const TopPlay = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { activeSong, isPlaying } = useSelector((state) => state.player)
+  const { activeSong, isPlaying, isSwitched } = useSelector(
+    (state) => state.player
+  )
   const { data } = useGetTopChartsQuery()
   const divRef = useRef(null)
 
@@ -72,7 +74,7 @@ const TopPlay = () => {
 
   useEffect(() => {
     divRef.current.scrollIntoView({ behavior: 'smooth' })
-  })
+  }, [isSwitched])
 
   return (
     <div
