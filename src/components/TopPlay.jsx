@@ -6,6 +6,7 @@ import { FreeMode } from 'swiper'
 import PlayPause from './PlayPause'
 import { playPause, setActiveSong } from '../redux/features/playerSlice'
 import { useGetTopChartsQuery } from '../redux/services/shazamCore'
+import unknown from '../assets/unknown.jpg'
 
 import 'swiper/css'
 import 'swiper/css/free-mode'
@@ -25,12 +26,12 @@ const TopChartCard = ({
       <h3 className="font-bold text-base text-white mr-3">{i + 1}.</h3>
       <div className="flex-1 flex flex-row justify-between items-center">
         <img
-          src={song?.images?.coverart}
+          src={song?.images?.coverart || unknown}
           alt={song?.title}
           className="w-20 h-20 rounded-lg"
         />
         <div className="flex-1 flex flex-col justify-center mx-3">
-          <Link to={`/songs/${song.key}`}>
+          <Link to={song?.images?.coverart ? `/songs/${song.key}` : null}>
             <p className="text-xl font-bold text-white">{song?.title}</p>
           </Link>
           <p
@@ -41,13 +42,15 @@ const TopChartCard = ({
           </p>
         </div>
       </div>
-      <PlayPause
-        isPlaying={isPlaying}
-        activeSong={activeSong}
-        song={song}
-        handlePause={handlePauseClick}
-        handlePlay={handlePlayClick}
-      />
+      {song?.images?.coverart && (
+        <PlayPause
+          isPlaying={isPlaying}
+          activeSong={activeSong}
+          song={song}
+          handlePause={handlePauseClick}
+          handlePlay={handlePlayClick}
+        />
+      )}
     </div>
   )
 }
@@ -128,9 +131,9 @@ const TopPlay = () => {
               className="shadow-lg rounded-full animate-slideright"
             >
               <img
-                src={song?.images?.background}
+                src={song?.images?.background || unknown}
                 alt="name"
-                className="rounded-full w-full object-cover cursor-pointer"
+                className="rounded-full w-full h-full object-cover cursor-pointer"
                 onClick={() => navigate(`/artists/${song?.artists[0].adamid}`)}
               />
             </SwiperSlide>
