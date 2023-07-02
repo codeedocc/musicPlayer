@@ -1,1 +1,1 @@
-Проект: https://codeedocc.github.io/musicPlayer/
+Проект: https://codeedocc.github.io/musicPlayer/ 
